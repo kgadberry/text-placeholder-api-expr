@@ -6,8 +6,8 @@
 	"description": "Adds basic expressions to PlaceholderAPI",
 	"authors": [ "tgrekov-mhl" ],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/MadHouse-Labs/text-placeholder-api-expr",
+		"sources": "https://github.com/MadHouse-Labs/text-placeholder-api-expr"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/placeholder-api-expr/icon.png",
