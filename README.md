@@ -80,7 +80,7 @@ Unlike other placeholders, arguments here must be separated by semicolons (`;`) 
 |               | c        | Math expression or text to use if `a` and `b` are equal.                                                                    |
 |               | dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.                                                        |
 |               | d        | Math expression or text to use if `a` and `b` are not equal.                                                                |
-|
+|               |          |                                                                                                                             |
 | `%expr:iflt%` |          | Return argument 4 or 6, depending on whether argument 1 is less than argument 2.                                            | `Player is in %expr:iflt ${player:health}; 14; false; poor; false; good% health`
 |               |          |                                                                                                                             | Player is in good health
 |               |          |                                                                                                                             | Player is in poor health
@@ -90,7 +90,7 @@ Unlike other placeholders, arguments here must be separated by semicolons (`;`) 
 |               | c        | Math expression or text to use if `a` and `b` are equal.                                                                    |
 |               | dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.                                                        |
 |               | d        | Math expression or text to use if `a` and `b` are not equal.                                                                |
-|
+|               |          |                                                                                                                             |
 | `%expr:ifgt%` |          | Return argument 4 or 6, depending on whether argument 1 is greater than argument 2. | `Health: %expr:ifgt ${player:health}; 4; true; ${player:health} * 100 / ${player:max_health}%; false; Nearly dead!%`
 |               |          |                                                                                                                             | Health: 75
 |               |          |                                                                                                                             | Health: Nearly dead!
