@@ -3,7 +3,7 @@
 	"id": "placeholder-api-expr",
 	"version": "${version}",
 	"name": "placeholder-api-expr",
-	"description": "Adds basic expressions to PlaceholderAPI",
+	"description": "Adds math and conditional expressions to Text Placeholder API.",
 	"authors": [ "tgrekov-mhl" ],
 	"contact": {
 		"homepage": "https://github.com/MadHouse-Labs/text-placeholder-api-expr",
