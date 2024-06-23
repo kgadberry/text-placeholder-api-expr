@@ -132,5 +132,101 @@ object PlaceholderAPIExpr: ModInitializer {
 				PlaceholderResult.invalid(e.message)
 			}
 		}
+
+		Placeholders.register(Identifier.of("expr", "pad")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat((_Keval.eval(args[0]).toInt() - args[1].trim().length) / 2)
+				PlaceholderResult.value(Text.literal(padString + args[1].trim() + padString))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
+
+		Placeholders.register(Identifier.of("expr", "padleft")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat(_Keval.eval(args[0]).toInt() - args[1].trim().length)
+				PlaceholderResult.value(Text.literal(padString + args[1].trim()))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
+
+		Placeholders.register(Identifier.of("expr", "padright")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat(_Keval.eval(args[0]).toInt() - args[1].trim().length)
+				PlaceholderResult.value(Text.literal(args[1].trim() + padString))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
+
+		Placeholders.register(Identifier.of("expr", "padmatch")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat((args[0].trim().length - args[1].trim().length) / 2)
+				PlaceholderResult.value(Text.literal(padString + args[1].trim() + padString))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
+
+		Placeholders.register(Identifier.of("expr", "padmatchleft")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat(args[0].trim().length - args[1].trim().length)
+				PlaceholderResult.value(Text.literal(padString + args[1].trim()))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
+
+		Placeholders.register(Identifier.of("expr", "padmatchright")) {ctx, arg ->
+			try {
+				if (arg == null)
+					throw Exception("Missing argument")
+
+				val args: List<String> = parseNested(arg, ctx).split(';')
+				if (args.size != 3)
+					throw Exception("Must have exactly 3 arguments")
+				val padString: String = args[2].trim()[0].toString().repeat(args[0].trim().length - args[1].trim().length)
+				PlaceholderResult.value(Text.literal(args[1].trim() + padString))
+			}
+			catch (e: Exception) {
+				PlaceholderResult.invalid(e.message)
+			}
+		}
 	}
 }

@@ -1,7 +1,11 @@
-
 # Text Placeholder API Expressions
-Adds math and conditional expressions to Text Placeholder API.  
+Adds math, conditional, and string manipulation expressions to Text Placeholder API.  
 This project uses [Keval](https://github.com/notKamui/Keval) for parsing math expressions, and would have been exponentially more difficult without it. Show the author some love and star his repo!
+
+### Using Placeholders In Expressions
+This extension uses the `${category:placeholder}` syntax to allow supplying placeholders that resolve to numbers as components.  
+For example; to display a player's health as a percentage (such as within the tab list), you could use the following:  
+`%expr:math ${player:health} * 100 / ${player:max_health}%%`
 
 ## Math Placeholder
 The bulk of the additions (no pun intended) in this extension are accessed through the `expr:math` placeholder.
@@ -60,13 +64,8 @@ Constants are components which resolve to a constant value.
 | PI       | π              |
 | e        | Euler's number |
 
-### Using Placeholders In Expressions
-This extension uses the `${category:placeholder}` syntax to allow supplying placeholders that resolve to numbers as components.  
-For example; to display a player's health as a percentage (such as within the tab list), you could use the following:  
-`%expr:math ${player:health} * 100 / ${player:max_health}%%`
-
 ## Conditional Placeholders
-Unlike other placeholders, arguments here must be separated by semicolons (`;`) instead of spaces.
+Arguments to these placeholders must be separated by semicolons (`;`) instead of spaces.
 
 ### `%expr:ifeq%`
 Test whether `a` and `b` are equal, and return `c` or `d` depending on the result.
@@ -85,8 +84,8 @@ Test whether `a` and `b` are equal, and return `c` or `d` depending on the resul
 
 #### Example
 `Player %expr:ifeq false; ${player:equipment_slot mainhand}; false; Diamond Sword; false; is; false; is not% holding a Diamond Sword.`
-| Condition                                           | Result
-| :-------------------------------------------------- | :-----
+| Condition                                             | Result
+| :---------------------------------------------------- | :-----
 | `%player:equipment_slot mainhand% == "Diamond Sword"` | Player is holding a Diamond Sword.
 | `%player:equipment_slot mainhand% != "Diamond Sword"` | Player is not holding a Diamond Sword.
 
@@ -130,3 +129,44 @@ Test whether `a` is greater than `b`, and return `c` or `d` depending on the res
 | `%player:health% == 15` | Health: 75
 | `%player:health% == 14` | Health: 70
 | `%player:health% <= 4`  | Health: Nearly dead!
+
+## String Placeholders
+Arguments to these placeholders must be separated by semicolons (`;`) instead of spaces.
+
+### `%expr:pad%`, `%expr:padleft%`, and `%expr:padright%`
+Pad one or both sides of `str` with `c` until the string length reaches `length`.
+
+`%expr:pad length; str; c%`
+`%expr:padleft length; str; c%`
+`%expr:padright length; str; c%`
+| Argument | Description
+| :------- | :----------
+| length   | Math expression, target length of the padded string.
+| str      | Source string to pad. Spaces at the start or end of the string are removed.
+| c        | Character to use for padding.
+
+#### Example
+`%expr:padleft 2 ${server:online} 0% / %server:max_players%`
+| Condition               | Result
+| :---------------------- | :-----
+| `%server:online% == 12` | 12 / 40
+| `%server:online% == 4`  | 04 / 40
+
+### `%expr:padmatch%`, `%expr:padmatchleft%`, and `%expr:padmatchright%`
+Pad one or both sides of `str` with `c` until the string length matches the length of `match`.
+
+`%expr:padmatch match; str; c%`
+`%expr:padmatchleft match; str; c%`
+`%expr:padmatchright match; str; c%`
+| Argument | Description
+| :------- | :----------
+| match    | String to match the length of. Spaces at the start or end of the string are removed.
+| str      | Source string to pad. Spaces at the start or end of the string are removed.
+| c        | Character to use for padding.
+
+#### Example
+`%expr:padmatchleft ${server:max_players} ${server:online} 0% / %server:max_players%`
+| Condition                                           | Result
+| :-------------------------------------------------- | :-----
+| `%server:max_players% == 40, %server:online% == 4`  | 04 / 40
+| `%server:max_players% == 100, %server:online% == 4` | 004 / 100
