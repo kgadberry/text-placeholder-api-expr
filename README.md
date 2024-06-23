@@ -67,36 +67,66 @@ For example; to display a player's health as a percentage (such as within the ta
 
 ## Conditional Placeholders
 Unlike other placeholders, arguments here must be separated by semicolons (`;`) instead of spaces.
-| Placeholder   | Argument | Description                                                                                                                 | Example
-| :------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------- |:-
-| `%expr:ifeq%` |          | Return argument 6 or 8, depending on whether arguments 2 and 4 are equal                                                    | `Player %expr:ifeq false; ${player:equipment_slot mainhand}; false; Diamond Sword; false; is; false; is not% holding a Diamond Sword`
-|               |          |                                                                                                                             | Player is holding a Diamond Sword
-|               |          |                                                                                                                             | Player is not holding a Diamond Sword
-|               | aIsMath  | Whether to parse `a` as a math expression. Either `true` or `false`.                                                        |
-|               | a        | Math expression or text to compare against b. If treated as text, and spaces at the start or end of the string are removed. |
-|               | bIsMath  | Whether to parse `b` as a math expression. Either `true` or `false`.                                                        |
-|               | b        | Math expression or text to compare against a. If treated as text, and spaces at the start or end of the string are removed. |
-|               | cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.                                                        |
-|               | c        | Math expression or text to use if `a` and `b` are equal.                                                                    |
-|               | dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.                                                        |
-|               | d        | Math expression or text to use if `a` and `b` are not equal.                                                                |
-|               |          |                                                                                                                             |
-| `%expr:iflt%` |          | Return argument 4 or 6, depending on whether argument 1 is less than argument 2.                                            | `Player is in %expr:iflt ${player:health}; 14; false; poor; false; good% health`
-|               |          |                                                                                                                             | Player is in good health
-|               |          |                                                                                                                             | Player is in poor health
-|               | a        | Math expression to compare against b.                                                                                       |
-|               | b        | Math expression to compare against a.                                                                                       |
-|               | cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.                                                        |
-|               | c        | Math expression or text to use if `a` and `b` are equal.                                                                    |
-|               | dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.                                                        |
-|               | d        | Math expression or text to use if `a` and `b` are not equal.                                                                |
-|               |          |                                                                                                                             |
-| `%expr:ifgt%` |          | Return argument 4 or 6, depending on whether argument 1 is greater than argument 2. | `Health: %expr:ifgt ${player:health}; 4; true; ${player:health} * 100 / ${player:max_health}%; false; Nearly dead!%`
-|               |          |                                                                                                                             | Health: 75
-|               |          |                                                                                                                             | Health: Nearly dead!
-|               | a        | Math expression to compare against b.                                                                                       |
-|               | b        | Math expression to compare against a.                                                                                       |
-|               | cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.                                                        |
-|               | c        | Math expression or text to use if `a` and `b` are equal.                                                                    |
-|               | dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.                                                        |
-|               | d        | Math expression or text to use if `a` and `b` are not equal.                                                                |
+
+### `%expr:ifeq%`
+Test whether `a` and `b` are equal, and return `c` or `d` depending on the result.
+
+`%expr:ifeq aIsMath a bIsMath b cIsMath c dIsMath d%`
+| Argument | Description
+| :------- | :----------
+| aIsMath  | Whether to parse `a` as a math expression. Either `true` or `false`.
+| a        | Math expression or text to compare against b. If treated as text, and spaces at the start or end of the string are removed.
+| bIsMath  | Whether to parse `b` as a math expression. Either `true` or `false`.
+| b        | Math expression or text to compare against a. If treated as text, and spaces at the start or end of the string are removed.
+| cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.
+| c        | Math expression or text to use if `a` and `b` are equal.
+| dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.
+| d        | Math expression or text to use if `a` and `b` are not equal.
+
+#### Example
+`Player %expr:ifeq false; ${player:equipment_slot mainhand}; false; Diamond Sword; false; is; false; is not% holding a Diamond Sword.`
+| Condition                                           | Result
+| :-------------------------------------------------- | :-----
+| `%player:equipment_slot mainhand% == "Diamond Sword"` | Player is holding a Diamond Sword.
+| `%player:equipment_slot mainhand% != "Diamond Sword"` | Player is not holding a Diamond Sword.
+
+### `%expr:iflt%`
+Test whether `a` is less than `b`, and return `c` or `d` depending on the result.
+
+`%expr:iflt a b cIsMath c dIsMath d%`
+| Argument | Description
+| :------- | :----------
+| a        | Math expression to compare against b.
+| b        | Math expression to compare against a.
+| cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.
+| c        | Math expression or text to use if `a` is less than `b`.
+| dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.
+| d        | Math expression or text to use if `a` is not less than `b`.
+
+#### Example
+`Player is in %expr:iflt ${player:health}; 14; false; poor; false; good% health`
+| Condition               | Result
+| :---------------------- | :-----
+| `%player:health% < 14`  | Player is in poor health
+| `%player:health% >= 14` | Player is in good health
+
+### `%expr:ifgt%`
+Test whether `a` is greater than `b`, and return `c` or `d` depending on the result.
+
+`%expr:ifgt a b cIsMath c dIsMath d%`
+| Argument | Description
+| :------- | :----------
+| a        | Math expression to compare against b.
+| b        | Math expression to compare against a.
+| cIsMath  | Whether to parse `c` as a math expression. Either `true` or `false`.
+| c        | Math expression or text to use if `a` is greater than `b`.
+| dIsMath  | Whether to parse `d` as a math expression. Either `true` or `false`.
+| d        | Math expression or text to use if `a` is not greater than `b`.
+
+#### Example
+`Health: %expr:ifgt ${player:health}; 4; true; ${player:health} * 100 / ${player:max_health}%; false; Nearly dead!%`
+| Condition               | Result
+| :---------------------- | :-----
+| `%player:health% == 15` | Health: 75
+| `%player:health% == 14` | Health: 70
+| `%player:health% <= 4`  | Health: Nearly dead!
