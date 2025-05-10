@@ -1,33 +1,33 @@
 {
-	"schemaVersion": 1,
-	"id": "placeholder-api-expr",
-	"version": "${version}",
-	"name": "placeholder-api-expr",
-	"description": "Adds math and conditional expressions to Text Placeholder API.",
-	"authors": [ "tgrekov-mhl" ],
-	"contact": {
-		"homepage": "https://github.com/MadHouse-Labs/text-placeholder-api-expr",
-		"sources": "https://github.com/MadHouse-Labs/text-placeholder-api-expr"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/placeholder-api-expr/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			{
-				"value": "mhl.papiexpr.PlaceholderAPIExpr",
-				"adapter": "kotlin"
-			}
-		]
-	},
-	"mixins": [],
-	"depends": {
-		"fabricloader": ">=0.15.11",
-		"minecraft": "~1.21",
-		"java": ">=21",
-		"fabric-api": "*",
-		"fabric-language-kotlin": "*",
-		"placeholder-api": "2.4.0-pre.2+1.21"
-	},
-	"suggests": {}
+  "schemaVersion": 1,
+  "id": "placeholder-api-expr",
+  "version": "${version}",
+  "name": "placeholder-api-expr",
+  "description": "Adds math and conditional expressions to Text Placeholder API.",
+  "authors": ["tgrekov-mhl"],
+  "contact": {
+    "homepage": "https://github.com/MadHouse-Labs/text-placeholder-api-expr",
+    "sources": "https://github.com/MadHouse-Labs/text-placeholder-api-expr"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/placeholder-api-expr/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "mhl.papiexpr.PlaceholderAPIExpr",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "placeholder-api": "2.6.3+1.21.5"
+  },
+  "suggests": {}
 }
