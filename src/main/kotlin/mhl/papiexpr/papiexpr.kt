@@ -141,7 +141,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat((_Keval.eval(args[0]).toInt() - args[1].trim().length) / 2)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = ((_Keval.eval(args[0]).toInt() - args[1].trim().length) / 2).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(padString + args[1].trim() + padString))
 			}
 			catch (e: Exception) {
@@ -157,7 +159,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat(_Keval.eval(args[0]).toInt() - args[1].trim().length)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = (_Keval.eval(args[0]).toInt() - args[1].trim().length).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(padString + args[1].trim()))
 			}
 			catch (e: Exception) {
@@ -173,7 +177,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat(_Keval.eval(args[0]).toInt() - args[1].trim().length)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = (_Keval.eval(args[0]).toInt() - args[1].trim().length).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(args[1].trim() + padString))
 			}
 			catch (e: Exception) {
@@ -189,7 +195,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat((args[0].trim().length - args[1].trim().length) / 2)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = ((args[0].trim().length - args[1].trim().length) / 2).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(padString + args[1].trim() + padString))
 			}
 			catch (e: Exception) {
@@ -205,7 +213,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat(args[0].trim().length - args[1].trim().length)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = (args[0].trim().length - args[1].trim().length).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(padString + args[1].trim()))
 			}
 			catch (e: Exception) {
@@ -221,7 +231,9 @@ object PlaceholderAPIExpr: ModInitializer {
 				val args: List<String> = parseNested(arg, ctx).split(';')
 				if (args.size != 3)
 					throw Exception("Must have exactly 3 arguments")
-				val padString: String = args[2].trim()[0].toString().repeat(args[0].trim().length - args[1].trim().length)
+				val padChar: Char = args[2].trim().firstOrNull() ?: ' '
+				val padCount: Int = (args[0].trim().length - args[1].trim().length).coerceAtLeast(0)
+				val padString: String = padChar.toString().repeat(padCount)
 				PlaceholderResult.value(Text.literal(args[1].trim() + padString))
 			}
 			catch (e: Exception) {
